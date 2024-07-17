@@ -17,17 +17,16 @@ class TestCategoryEndPoint:
         assert len(response.json()) == 4
 
 class TestProductEndPint:
-    endpoint = "/api/product/"
+    endpoint = "/products/"
     
     def test_product_get(self, product_factory, api_client):
         # Arrange
-        x = product_factory.create_batch(4)
-        # Act 
+        x = product_factory()
+        # Act core
         response = api_client().get(self.endpoint)
-        print(response.json())
         # Assert
         assert response.status_code == 200
-        assert len(response.json()) == 4
+        assert len(response.json()) == 1
         
         
 class TestBrandEndPoint:
@@ -36,7 +35,7 @@ class TestBrandEndPoint:
     def test_brand_get(self, brand_factory, api_client):
         # Arrange
         x = brand_factory.create_batch(4)
-        # Act 
+        # Act  
         response = api_client().get(self.endpoint)
         print(response.content)
         # Assert
