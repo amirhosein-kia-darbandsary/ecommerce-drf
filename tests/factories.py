@@ -1,5 +1,6 @@
 import factory
-from product.models import Brand, Category, Product, ProductLine
+from product.models import (Brand, Category, Product, ProductLine,ProductImage)
+
 from django.utils.text import slugify
 
 class CategoryFactory(factory.django.DjangoModelFactory):
@@ -42,4 +43,19 @@ class ProductLineFactory(factory.django.DjangoModelFactory):
     product = factory.SubFactory(ProductFactory)
     ordering = factory.Sequence(lambda n: n)
         
+class ProductImageFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = ProductImage
+        
+    alternative_text = factory.Sequence(lambda n: f'product {n}')
+    url = "test.jpg"
+    productline = factory.SubFactory(ProductLineFactory)
+    
+    
+    
+
+        
+    
+        
+
     

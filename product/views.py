@@ -1,7 +1,5 @@
-from rest_framework import viewsets
-from rest_framework.response import Response    
-from rest_framework import generics
-
+from rest_framework import generics, viewsets
+from rest_framework.response import Response
 
 from .models import Brand, Category, Product
 from .serializers import (BrandSerializers, CategorySerializers,
@@ -32,8 +30,7 @@ class ProductListCreateApiView(generics.ListCreateAPIView):
     # queryset = Product.isactive.all().select_related("brand","category")
     
     # * we build and use a method for using after the object manager
-    queryset = Product.objects.isactive().select_related("brand","category")
-    
+    queryset = Product.objects.select_related("brand","category").prefetch_related("product_line__product_image")
     
     serializer_class = ProductSerializers
     

@@ -74,5 +74,21 @@ class ProductLine(models.Model):
     
     def __str__(self):
         return self.sku
+    
+class ProductImage(models.Model):
+    alternative_text = models.CharField(max_length=120)
+    url = models.ImageField(upload_to=None)
+    productline = models.ForeignKey(
+        ProductLine,
+        on_delete=models.CASCADE,
+        related_name="product_image"    
+    )
+    ordering = models.PositiveIntegerField(default=0,
+                                           unique=True)
+    
+    
+    def __str__(self) -> str:
+        return self.url
+    
             
     
